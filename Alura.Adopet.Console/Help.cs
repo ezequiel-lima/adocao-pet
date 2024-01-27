@@ -1,5 +1,6 @@
 ﻿namespace Alura.Adopet.Console
 {
+    [DocComando(instrucao: "help", documentacao: "")]
     public class Help
     {
         public void ExibeDocumentacao(string[] parametros)

@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 
 namespace Alura.Adopet.Console
 {
+    [DocComando(instrucao: "list", documentacao: "")]
     public class List
     {
         private readonly HttpClient _client;

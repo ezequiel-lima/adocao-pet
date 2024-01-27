@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using Alura.Adopet.Console;
+﻿using Alura.Adopet.Console;
 
 Console.ForegroundColor = ConsoleColor.Green;
 
