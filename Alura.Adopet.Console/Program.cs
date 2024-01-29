@@ -1,31 +1,27 @@
 ﻿using Alura.Adopet.Console;
+using Alura.Adopet.Console.Comandos;
 
 Console.ForegroundColor = ConsoleColor.Green;
+Dictionary<string, ICommand> comandosDoSistema = new Dictionary<string, ICommand>()
+{
+    { "help", new Help() },
+    { "import", new Import() },
+    { "list", new List() },
+    { "show", new Show() }
+};
 
 try
 {
     string comando = args[0].Trim();
-    switch (comando)
+
+    if (comandosDoSistema.ContainsKey(comando))
     {
-        case "import":
-            var import = new Import();
-            await import.ImportacaoArquivoPetAsync(caminhoDoArquivoDeImportacao: args[1]);
-            break;
-        case "help":
-            var help = new Help();
-            help.ExibeDocumentacao(args);
-            break;
-        case "show":
-            var show = new Show();
-            show.ExibeConteudoArquivo(args);           
-            break;
-        case "list":
-            var list = new List();
-            await list.PetsAsync();          
-            break;
-        default:
-            Console.WriteLine("Comando inválido!");
-            break;
+        ICommand? command = comandosDoSistema[comando];
+        await command.Execute(args);
+    }
+    else
+    {
+        Console.WriteLine("Comando invalido!");
     }
 }
 catch (Exception ex)

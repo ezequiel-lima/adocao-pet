@@ -1,10 +1,11 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using Alura.Adopet.Console.Modelos;
 
-namespace Alura.Adopet.Console
+namespace Alura.Adopet.Console.Comandos
 {
     [DocComando(instrucao: "list", documentacao: "")]
-    public class List
+    public class List : ICommand
     {
         private readonly HttpClient _client;
 
@@ -13,7 +14,7 @@ namespace Alura.Adopet.Console
             _client = ConfiguraHttpClient("http://localhost:5057");
         }
 
-        public async Task PetsAsync()
+        private async Task PetsAsync()
         {
             var pets = await ListPetsAsync();
             foreach (var pet in pets)
@@ -36,6 +37,12 @@ namespace Alura.Adopet.Console
                 new MediaTypeWithQualityHeaderValue("application/json"));
             _client.BaseAddress = new Uri(url);
             return _client;
+        }
+
+        public Task Execute(string[] args)
+        {
+            PetsAsync();
+            return Task.CompletedTask;
         }
     }
 }
