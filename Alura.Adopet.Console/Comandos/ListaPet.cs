@@ -5,11 +5,11 @@ using Alura.Adopet.Console.Modelos;
 namespace Alura.Adopet.Console.Comandos
 {
     [DocComando(instrucao: "list", documentacao: "")]
-    public class List : ICommand
+    public class ListaPet : ICommand
     {
         private readonly HttpClient _client;
 
-        public List()
+        public ListaPet()
         {
             _client = ConfiguraHttpClient("http://localhost:5057");
         }
@@ -23,7 +23,7 @@ namespace Alura.Adopet.Console.Comandos
             }
         }
 
-        async Task<IEnumerable<Pet>?> ListPetsAsync()
+        public async Task<IEnumerable<Pet>?> ListPetsAsync()
         {
             HttpResponseMessage response = await _client.GetAsync("pet/list");
             return await response.Content.ReadFromJsonAsync<IEnumerable<Pet>>();

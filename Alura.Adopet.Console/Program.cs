@@ -6,7 +6,7 @@ Dictionary<string, ICommand> comandosDoSistema = new Dictionary<string, ICommand
 {
     { "help", new Help() },
     { "import", new Import() },
-    { "list", new List() },
+    { "list", new ListaPet() },
     { "show", new Show() }
 };
 
